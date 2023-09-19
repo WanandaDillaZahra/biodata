@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\PesertadidikM;
+use PDF;
 
 class PesertadidikR extends Controller
 {
@@ -14,8 +15,10 @@ class PesertadidikR extends Controller
      */
     public function index()
     {
-        $pesertaM = PesertadidikM::all();
-        return view('pesertadidik', compact('pesertaM') );
+        // $pesertaM = PesertadidikM::all();
+        $pesertaM = PesertadidikM::search(request('search'))->paginate(10);
+        $vcari = request('search');
+        return view('pesertadidik', compact('pesertaM', 'vcari'));
     }
 
     /**
@@ -101,5 +104,12 @@ class PesertadidikR extends Controller
     {
         PesertadidikM::where('id', $id)->delete();
         return redirect()->route('pesertadidik.index')-> with('success', 'Peserta Didik Berhasil Dihapus');
+    }
+
+    public function pdf(){
+        $pesertaM = PesertadidikM::all();
+        // return view('pesertadidik_pdf', compact('pesertaM'));
+        $pdf = PDF:: loadview('pesertadidik_pdf', ['pesertaM' => $pesertaM]);
+        return $pdf->stream('pesetadidik.pdf');
     }
 }

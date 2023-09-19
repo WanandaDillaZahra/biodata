@@ -47,10 +47,10 @@
       <!-- Sidebar user (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="../../dist/img/user3-128x128.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Wananda Dilla Zahra</a>
+          <a href="#" class="d-block">{{ Auth::user()->name }}</a>
         </div>
       </div>
 
@@ -73,10 +73,9 @@
                with font-awesome or any other icon font library -->
           <li class="nav-item">
             <a href="{{url("dashboard")}}" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fas fa-home text-chimney"></i>
               <p>
                 Dashboard
-                {{-- <i class="right fas fa-angle-left"></i> --}}
               </p>
             </a>
           <li class="nav-item">
@@ -90,17 +89,24 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ url("guru")}}" class="nav-link">
-                  <i class="fas fa-user nav-icon"></i>
+                  <i class="nav-icon fas fa-user"></i>
                   <p>Guru</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ url("pesertadidik")}}" class="nav-link">
-                  <i class="fas fa-users nav-icon"></i>
+                  <i class="nav-icon fas fa-users"></i>
                   <p>Peserta Didik</p>
                 </a>
               </li>
         </ul>
+        <li class="nav-item">
+          <a href="{{url("logout")}}" class="nav-link">
+            <i class="nav-icon fas fa-sign-out-alt"></i>
+            <p>
+              Log out
+            </p>
+          </a>
       </nav>
       <!-- /.sidebar-menu -->
     </div>

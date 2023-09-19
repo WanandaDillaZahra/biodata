@@ -29,10 +29,22 @@
         </div> --}}
       </div>
       <div class="card-body">
+        <form action="{{ route('pesertadidik.index') }}" method="get">
+          <div class="input-group">
+            <input type="search" name="search" class="form-control" placeholder="Masukan Nama Lengkap" value="{{$vcari}}">
+            <button type="submit" class="btn btn-primary">Cari</button>
+            <a href="{{route('pesertadidik.index')}}">
+              <button type="button" class="btn btn-danger">Reset</button>
+            </a>
+          </div>
+        </form>
+        <br>
+
         @if($message = Session::get('success'))
               <div class="alert alert-success">{{$message}}</div>
             @endif
         <a href="{{ route('pesertadidik.create') }}" class="btn btn-success">Tambah Data</a>
+        <a href="{{url('pesertadidik/pdf')}}" class="btn btn-warning">Unduh PDF</a>
         <br><br>
         <table class="table table-striped table-bordered">
           <tr>
@@ -42,8 +54,9 @@
             <th>Nilai</th>
             <th>Aksi</th>
           </tr>
+          @if(count($pesertaM) > 0)
           @foreach ($pesertaM as $peserta)
-              <tr>
+          <tr>
                 <td>{{ $peserta->nis }}</td>
                 <td>{{ $peserta->namalengkap }}</td>
                 <td>{{ $peserta->jk }}</td>
@@ -58,8 +71,13 @@
                   </form>
                   
                 </td>
-              </tr>
+          </tr>
           @endforeach
+          @else
+          <tr>
+            <td colspan="5">Data Tidak Ditemukan</td>
+          </tr>
+          @endif
         </table>
       </div>
       <!-- /.card-body -->
